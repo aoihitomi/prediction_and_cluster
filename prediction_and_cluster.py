@@ -10,12 +10,13 @@ def summary(data):
     print(data['Genre'].value_counts())
     print(data['Publisher'].value_counts())
     print(data.iloc[0:10]['Name'])
+    print(data.groupby('Publisher')[['Publisher', 'Global_Sales']].sum().sort_values(by = ['Global_Sales']))
 
 # 对全球销售额数据进行多项式拟合
 def fit(data):
     year_data = data.groupby('Year').sum()
     year_data = year_data[['Global_Sales']]
-    year_data = year_data.loc[1980:2016]
+    year_data = year_data.loc[1980:2015]
     
     years = []
     sales = []
@@ -71,7 +72,3 @@ if __name__ == '__main__':
     show_genre_and_publisher(data, 'Genre')
     show_genre_and_publisher(data, 'Publisher')
     show_genre_and_publisher(data, 'Platform')
-    
-
-
-    
